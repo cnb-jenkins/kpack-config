@@ -1,0 +1,41 @@
+---
+apiVersion: kpack.io/v1alpha1
+kind: ClusterStack
+metadata:
+  name: default
+spec:
+  id: "io.buildpacks.stacks.bionic"
+  buildImage:
+    image: "paketobuildpacks/build:base-cnb"
+  runImage:
+    image: "paketobuildpacks/run:base-cnb"
+---
+apiVersion: kpack.io/v1alpha1
+kind: ClusterStore
+metadata:
+  name: sample-cluster-store
+spec:
+  sources:
+  - image: gcr.io/paketo-buildpacks/java
+  - image: gcr.io/paketo-buildpacks/nodejs
+---
+apiVersion: kpack.io/v1alpha1
+kind: ClusterBuilder
+metadata:
+  name: my-cluster-builder
+spec:
+  tag: samj1912/cluster-builder
+  stack:
+    name: bionic-stack
+    kind: ClusterStack
+  store:
+    name: sample-cluster-store
+    kind: ClusterStore
+  serviceAccountRef:
+    name: default
+    namespace: default
+  order:
+  - group:
+    - id: paketo-buildpacks/java
+  - group:
+    - id: paketo-buildpacks/nodejs
