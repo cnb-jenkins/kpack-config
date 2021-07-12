@@ -35,7 +35,7 @@ spec:
     name: default
     namespace: default
   order:
-  - group:
-    - id: paketo-buildpacks/java
+#   - group:
+#     - id: paketo-buildpacks/java
   - group:
     - id: paketo-buildpacks/nodejs
