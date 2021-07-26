@@ -11,12 +11,31 @@ spec:
     image: "paketobuildpacks/run:1.1.11-base-cnb"
 ---
 apiVersion: kpack.io/v1alpha1
+kind: ClusterStack
+metadata:
+  name: tiny-stack
+spec:
+  id: "io.paketo.stacks.tiny"
+  buildImage:
+    image: "paketobuildpacks/build:1.2.16-tiny-cnb"
+  runImage:
+    image: "paketobuildpacks/run:1.2.16-tiny-cnb"
+---
+apiVersion: kpack.io/v1alpha1
 kind: ClusterStore
 metadata:
   name: sample-cluster-store
 spec:
   sources:
   - image: gcr.io/paketo-buildpacks/nodejs:0.4.0
+---
+apiVersion: kpack.io/v1alpha1
+kind: ClusterStore
+metadata:
+  name: tiny-cluster-store
+spec:
+  sources:
+  - image: gcr.io/paketo-buildpacks/go:0.8.0
 ---
 apiVersion: kpack.io/v1alpha1
 kind: ClusterBuilder
@@ -36,3 +55,22 @@ spec:
   order:
   - group:
     - id: paketo-buildpacks/nodejs
+---
+apiVersion: kpack.io/v1alpha1
+kind: ClusterBuilder
+metadata:
+  name: tiny-cluster-builder
+spec:
+  tag: samj1912/tiny-cluster-builder
+  stack:
+    name: tiny-stack
+    kind: ClusterStack
+  store:
+    name: tiny-cluster-store
+    kind: ClusterStore
+  serviceAccountRef:
+    name: default
+    namespace: default
+  order:
+  - group:
+    - id: paketo-buildpacks/go
