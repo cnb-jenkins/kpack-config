@@ -6,9 +6,9 @@ metadata:
 spec:
   id: "io.buildpacks.stacks.bionic"
   buildImage:
-    image: "paketobuildpacks/build:1.1.10-base-cnb"
+    image: "paketobuildpacks/build:1.1.11-base-cnb"
   runImage:
-    image: "paketobuildpacks/run:1.1.10-base-cnb"
+    image: "paketobuildpacks/run:1.1.11-base-cnb"
 ---
 apiVersion: kpack.io/v1alpha1
 kind: ClusterStore
