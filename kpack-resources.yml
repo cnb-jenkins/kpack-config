@@ -6,7 +6,7 @@ metadata:
 spec:
   id: "io.buildpacks.stacks.bionic"
   buildImage:
-    image: "paketobuildpacks/build:1.1.13-base-cnb"
+    image: "paketobuildpacks/build:1.1.11-base-cnb"
   runImage:
     image: "paketobuildpacks/run:1.1.11-base-cnb"
 ---
@@ -16,8 +16,7 @@ metadata:
   name: sample-cluster-store
 spec:
   sources:
-  - image: gcr.io/paketo-buildpacks/java
-  - image: gcr.io/paketo-buildpacks/nodejs
+  - image: gcr.io/paketo-buildpacks/nodejs:0.5.0
 ---
 apiVersion: kpack.io/v1alpha1
 kind: ClusterBuilder
@@ -35,7 +34,5 @@ spec:
     name: default
     namespace: default
   order:
-  - group:
-    - id: paketo-buildpacks/java
   - group:
     - id: paketo-buildpacks/nodejs
