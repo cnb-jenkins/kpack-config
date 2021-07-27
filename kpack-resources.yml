@@ -17,9 +17,9 @@ metadata:
 spec:
   id: "io.paketo.stacks.tiny"
   buildImage:
-    image: "paketobuildpacks/build:1.2.15-tiny-cnb"
+    image: "paketobuildpacks/build:1.2.14-tiny-cnb"
   runImage:
-    image: "paketobuildpacks/run:1.2.15-tiny-cnb"
+    image: "paketobuildpacks/run:1.2.14-tiny-cnb"
 ---
 apiVersion: kpack.io/v1alpha1
 kind: ClusterStore
@@ -35,7 +35,7 @@ metadata:
   name: tiny-cluster-store
 spec:
   sources:
-  - image: gcr.io/paketo-buildpacks/go:0.8.0
+  - image: gcr.io/paketo-buildpacks/go:0.7.0
 ---
 apiVersion: kpack.io/v1alpha1
 kind: ClusterBuilder
